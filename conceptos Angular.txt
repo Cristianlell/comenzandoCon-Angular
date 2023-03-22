@@ -1,0 +1,100 @@
+
+/*** Para instalar
+
+npm install -g @angular/cli
+
+/*** Para crear proyecto
+
+ng new my-app
+
+
+/*** Por si windows no deja correr scripts
+
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
+/*** Para ingresar a la carpeta creada y correr la app en una pestaña del navegador
+
+cd my-app
+ng serve --open
+
+
+
+
+/** PARA CREAR UN COMPONENTE **
+
+ng g c "carpeta/NombreDelComponente" luego de crear el componente lo lo declara automaticamente en Declarations en app.module.ts
+
+/** OnInit() **
+
+ngOnInit() nos permite hacer algo antes que se renderice el componente, por ejemplo hacer una peticion HTTP para mostrarla en la vista
+
+/** @Input() **
+
+Con este decorador le estamos diciendo que va a recibir el valor del componente que renderice a este (componente padre le pasa valor al componente hijo)
+
+ejemplo :
+
+COMPONENTE HIJO:
+
+ @input() nombre: string = "Anónimo"; le pasamos un valor por defecto
+
+COMPONENTE PADRE:
+
+<componente-Hijo nombre="cristian"></componente-Hijo> // le pasamos un valor literal
+<componente-Hijo [nombre]="nombre"></componente-Hijo> // le pasamos un valor dinamico
+
+@Output sirve para enviar mensaje desde el componente hijo al componente padre:
+
+COMPONENTE HIJO
+ @Output() mensajeEmitHijo: EventEmitter<string> = new EventEmitter;
+
+enviarMensajeAlPadre(): void {
+    this.mensajeEmitHijo.emit(`Hola ${this.nombre}. Evento click lanzado desde el hijo`);
+  }
+<button id="boton-click" (click)="enviarMensajeAlPadre()">Mostrar Evento</button> <!-- los eventos se pasan atravez 
+
+
+COMPONENTE PADRE
+
+recibirMensajePadre(evento: string){
+    alert(evento)
+  }
+
+<app-saludo [nombre]="nombre" (mensajeEmitHijo)="recibirMensajePadre($event)"></app-saludo>
+//$event es el evento que se emite
+
+/* ngModule*/
+
+si nos da un ellor al utilizar ngModel puede ser que no importamos el FormsModule en el app.module
+<input type="text" placeholder="Nombre de usuario " [(ngModel)]="nombre"/> utilizamos esto para que cuando el usuario escriba un cambio desde la vista se modifique el valor de la variable nombre en el controlador (bindiear)
+
+
+/* EVENTOS */
+Para pasar eventos se utilizan los parentecis 
+ejemplo:
+	<button id="boton-click" (click)="alertaSaludo()">Mostrar Evento</button> <!-- los eventos se pasan atravez de parentesis -->
+
+<T> es un tipo genérico toma el valor de tipo de dato que le pasemos:
+class Animal {
+}
+
+function cuidar<T>(algo: T): T {
+  return algo;
+}
+
+let algo = cuidar(new Animal()); // ahora "algo" es de tipo Animal
+
+CICLO DE VIDA DEL COMPONENTE OnInit OnChanges OnDestroy
+
+ngOnInit() nos permite hacer algo antes que se renderice el componente, por ejemplo hacer una peticion HTTP para mostrarla en la vista.
+
+ngOnChanges(): se carga antes que el OnInit y nos permite ver los cambios como el previosValue o el cambio en si en el currentValue.
+
+ngDestroy(): nos sirve para cuando se desmonta el componente.
+
+
+/**              ESTILOS             **/
+
+
+
+

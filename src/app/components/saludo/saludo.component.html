@@ -1,0 +1,13 @@
+<h1>Hola, {{ nombre }}</h1>
+<span id="span-app" class="saludo" [innerText]="nombre"> <!-- escribe dinamicamente el valor de nombre dentro de las etiquetas -->
+</span>
+
+<h3 ngClass="saludo">Probando ngClass </h3> <!-- ngClass="" podemos pasarle la clase -->
+<h3 [ngClass]="nombre == 'Anónimo' ? myStyle : 'saludo'">Probando [ngClass] nombre es igual a: {{nombre}} </h3> <!-- [ngClass]="nombre == 'anonimo' ? '' : 'saludo'" podemos pasarle la clase de manera condicional-->
+
+
+<p [ngStyle]="{color:'blue'}"> le podemos asignar directamente el style</p> <!-- le podemos asignar directamente el style -->
+<p [ngStyle]="myStyle"> o pasarle una variable que tengamos en el controlador</p> <!-- o pasarle una variable que tengamos en el controlador -->
+
+
+<button id="boton-click" (click)="enviarMensajeAlPadre()">Mostrar Evento</button> <!-- los eventos se pasan atravez de parentesis -->
