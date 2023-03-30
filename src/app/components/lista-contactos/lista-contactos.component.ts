@@ -1,27 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IContacto } from 'src/app/models/contacto.interface';
 import { ContactoService } from 'src/app/services/contacto.service';
-
+import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-lista-contactos',
   templateUrl: './lista-contactos.component.html',
   styleUrls: ['./lista-contactos.component.css']
 })
-export class ListaContactosComponent implements OnInit{
+export class ListaContactosComponent implements OnInit, OnDestroy{
   // creamos una lista para los contactos
   listaContactos: IContacto[]= [];
   contacto: IContacto | undefined;
-  constructor(private contactoService: ContactoService){} // inicializamos el servicio en el contructor para que este disponible
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    //obtener la lista de contactos
-    this.listaContactos =  this.contactoService.obtenerContactos();
-  }
+  // subscripcion de servicios
+  subscription: Subscription | undefined;
 
-  obtenerContacto(id:number){
-    // console.log(id);
-    this.contacto = this.contactoService.obtenerContactoID(id);
+  constructor(private contactoService: ContactoService){} // inicializamos el servicio en el contructor para que este disponible
+
+  ngOnInit(): void {
+    //obtener la lista de contactos
+    this.contactoService.obtenerContactos()
+    .then((contactos: IContacto[]) => this.listaContactos =  contactos)
+    .catch(error => console.log(error))
     
   }
+
+  async obtenerContacto(id:number){
+    // console.log(id);
+   this.subscription =  this.contactoService.obtenerContactoID(id)?.subscribe((contact: IContacto) => this.contacto = contact)
+    console.log(this.contacto);
+    
+  }
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
 }
