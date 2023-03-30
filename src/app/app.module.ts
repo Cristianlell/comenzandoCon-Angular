@@ -4,15 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { SaludoComponent } from './components/saludo/saludo.component';
+import { ListsModule } from './modules/lists/lists.module';
+import { ListaContactosComponent } from './components/lista-contactos/lista-contactos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SaludoComponent
+    SaludoComponent,
+    ListaContactosComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    //importamos nuestro modulo personalizado
+    ListsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

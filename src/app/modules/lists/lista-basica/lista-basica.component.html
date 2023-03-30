@@ -1,0 +1,77 @@
+<!-- BLOQUE DE DIRECTIVAS DE ATRIBUTO -->
+
+<h3 ngClass="saludo">Probando ngClass</h3>
+<!-- ngClass="" podemos pasarle la clase -->
+<!-- <h3 [ngClass]="nombre == 'Anónimo' ? myStyle : 'saludo'">Probando [ngClass] nombre es igual a: {{nombre}} </h3> <!-- [ngClass]="nombre == 'anonimo' ? '' : 'saludo'" podemos pasarle la clase de manera condicional-->
+-->
+<p [ngStyle]="{ color: 'blue' }">le podemos asignar directamente el style</p>
+<!-- le podemos asignar directamente el style -->
+<p [ngClass]="{ saludo: false }">
+      o pasarle una variable que tengamos en el controlador
+</p>
+<!-- o pasarle una variable que tengamos en el controlador -->
+
+<!-- BLOQUE DE DIRECTIVAS ESTRUCTURALES -->
+
+<!-- <p *ngIf="cargando">Cargando...</p> <!-- Evalua si cargando es true o false -->
+-->
+<ng-container *ngIf="cargando; else elseTemplate">
+      <p>Todo está listo!!</p>
+</ng-container>
+<ng-template #elseTemplate>
+      <p>Cargando...</p>
+      <P>Espere que todo este listo</P>
+</ng-template>
+
+<button (click)="cambiarCargando()">
+      {{ cargando ? "Terminar carga" : "Iniciar carga" }}
+</button>
+
+<!-- NGFOR -->
+
+<div *ngFor="let producto of listaElementos; let i = index; let even = even">
+      <!-- podemos camputar el indice y tambien si es par o no (index, even) -->
+      <!-- Ambito del for -->
+      <div [ngStyle]="even ? { backgroundColor: 'blue', color: 'white', fontWeight:'bold'} : { backgroundColor: 'red', color: 'white', fontWeight:'bold'}"
+            class="producto">
+            <p>ID: {{i}}</p>
+            <p>Es par: {{even ? 'Si' : 'No'}}</p>
+            <p>{{ producto.nombre }} - ${{ producto.precio }}</p>
+            <p>{{ producto.descripcion }}</p>
+      </div>
+</div>
+
+<!-- NGSWITCH -->
+
+<div [ngSwitch]="opcion">
+      <p *ngSwitchCase="1">Opcion 1</p>
+      <p *ngSwitchCase="2">Opcion 2</p>
+      <p *ngSwitchCase="3">Opcion 3</p>
+      <p *ngSwitchCase="4">Opcion 4</p>
+      <p *ngSwitchDefault>Ninguna opción es válida</p>
+</div>
+<!-- seleccion de opciones del usuario, el name con el mismo nombre en el input se usa para que no queden seleccionados todos los inputs-->
+<div>
+      <input type="radio" name="opcion" (click)="cambiarOpcion(1)"> Opción 1
+      <input type="radio" name="opcion" (click)="cambiarOpcion(2)"> Opción 2
+      <input type="radio" name="opcion" (click)="cambiarOpcion(3)"> Opción 3
+      <input type="radio" name="opcion" (click)="cambiarOpcion(4)"> Opción 4
+      <input type="radio" name="opcion" (click)="cambiarOpcion(0)"> Ninguna
+</div>
+
+
+<!-- concatenar directivas -->
+
+<p>Productos con precio mayor a $10</p>
+<div *ngFor="let producto of listaElementos; let i = index; let even = even">
+      <!-- podemos camputar el indice y tambien si es par o no (index, even) -->
+      <!-- Ambito del for -->
+      <div *ngIf="producto.precio > 10"
+            [ngStyle]="even ? { backgroundColor: 'blue', color: 'white', fontWeight:'bold'} : { backgroundColor: 'red', color: 'white', fontWeight:'bold'}"
+            class="producto">
+            <p>ID: {{i}}</p>
+            <p>Es par: {{even ? 'Si' : 'No'}}</p>
+            <p>{{ producto.nombre }} - ${{ producto.precio }}</p>
+            <p>{{ producto.descripcion }}</p>
+      </div>
+</div>
