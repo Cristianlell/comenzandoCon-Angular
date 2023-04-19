@@ -1,0 +1,21 @@
+<form [formGroup]="miFormulario">
+      <!-- Previsualizamos los valores del formulario -->
+      <!-- usaremos un PIPE de Angular de tipo JSON para pasar el objeto a un JSON y mostrarlos -->
+            <p>{{ miFormulario.value | json}}</p>
+      <!-- campos del formulario -->
+    
+            <input matInput placeholder="Nombre" formControlName="nombre" />
+    
+    
+            <input matInput placeholder="Apellido" formControlName="apellido" />
+    
+    
+            <input matInput placeholder="Email" formControlName="email" />
+    
+    
+            <input matInput placeholder="Telefono" formControlName="telefono" />
+    
+    
+            <input matInput placeholder="Direccion" formControlName="direccion" />
+    
+</form>

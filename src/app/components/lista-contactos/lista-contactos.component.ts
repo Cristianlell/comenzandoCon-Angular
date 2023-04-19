@@ -24,7 +24,7 @@ export class ListaContactosComponent implements OnInit, OnDestroy{
     
   }
 
-  async obtenerContacto(id:number){
+  obtenerContacto(id:number){
     // console.log(id);
    this.subscription =  this.contactoService.obtenerContactoID(id)?.subscribe((contact: IContacto) => this.contacto = contact)
     console.log(this.contacto);

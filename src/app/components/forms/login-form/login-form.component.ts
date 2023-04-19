@@ -13,6 +13,7 @@ export class LoginFormComponent implements OnInit {
     this.authService.login('eve.holt@reqres.in',"cityslicka").subscribe(
       (res) => {
         console.log("Respuesta Login: ",res);
+        sessionStorage.setItem('token', res.token)
       },
       (error) => console.log("Error Login: ", error),
       () => console.log("Se completo el request a reqres.io")

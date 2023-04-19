@@ -1,0 +1,19 @@
+<form [formGroup]="miFormularioArray">
+      <h3>Datos en vivo del formuario</h3>
+      <p>{{miFormularioArray.value | json}}</p>
+      <input placeholder="Nombre" formControlName="nombre">
+      <input placeholder="Apellido" formControlName="apellido">
+      <div formArrayName="telefonos">
+            <!-- TelefonoFormulario nos devuelve un array y utilizamos controls para acceder a los telefonos -->
+            <!-- Agrupamos los telefonos en un formGoupName que sera el indice del array-->
+            <div *ngFor="let telefono of telefonosFormulario.controls; let i=index" [formGroupName]="i"> 
+                  <h5>Teléfono index: {{i}}</h5>
+                  <input placeholder="Prefijo" formControlName="prefijo">
+                  <input placeholder="Número" formControlName="numero">
+                  <!-- Boton para borrar telefono -->
+                  <button (click)="eliminarTelefono(i)">Borrar</button>
+            </div>
+      </div>
+      <!-- Boton para añadir telefono -->
+      <button (click)="anadirTelefono()">Añadir Teléfono </button>
+</form>
