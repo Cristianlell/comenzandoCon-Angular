@@ -21,7 +21,10 @@ import { CalcularPuntuacionPipe } from './pipes/calcular-puntuacion.pipe';
 /* modulos para locale */
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { EjemploAnimacionesComponent } from './components/ejemplo-animaciones/ejemplo-animaciones.component';
 registerLocaleData(localeES); /* registramos el locale_id de 'es' para poder usarlo en los pipe */
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +37,8 @@ registerLocaleData(localeES); /* registramos el locale_id de 'es' para poder usa
     FormularioValidadoComponent,
     EjemploPipesComponent,
     MultiplicaPipe,
-    CalcularPuntuacionPipe
+    CalcularPuntuacionPipe,
+    EjemploAnimacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +49,11 @@ registerLocaleData(localeES); /* registramos el locale_id de 'es' para poder usa
     ListsModule,
     // importamos el modulo de HttpClientModule
     HttpClientModule,
+    // Modulo para las animaciones
     BrowserAnimationsModule,
     /* modulo de angular material */
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatButtonModule
     
   ],
   providers: [
